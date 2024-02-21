@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add to Movies Browsing Site</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Link to the TS file -->
+    <script type="module" src="edit.ts"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Edit movie properties</h1>
+
+      <form id="edit-form">
+        <label for="edit-id">ID</label>
+        <input type="number" id="edit-id" placeholder="Autogeeratedn ID" disabled />
+        <label for="edit-name">Title</label>
+        <input type="text" id="edit-name" placeholder="Enter a movie title" />
+        <label for="edit-runtime">Runtime</label>
+        <input type="number" id="edit-runtime" placeholder="Enter the movie runtime" />
+        <hr />
+        <label for="edit-platform">Platform</label>
+        <select id="edit-platform"></select>
+        <hr />
+        <button type="submit" id="edit-button">Save</button>
+        <button type="button" id="delete-button">Delete</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies Browsing Site</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Link to the TS file -->
+    <script type="module" src="/index.ts"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Movies Browsing Site</h1>
+      <p>Find your favorite movies and where to watch them</p>
+
+      <form id="search-form">
+        <div class="search">
+          <input type="text" id="search-input" placeholder="Enter a movie name" />
+          <button type="submit" id="search-button">Search</button>
+        </div>
+
+        <div id="filters">
+          <h2>Filters</h2>
+          <div id="platforms"></div>
+        </div>
+      </form>
+
+      <div id="loader"></div>
+      <div id="search-results"></div>
+
+      <div id="preview"></div>
+
+      <div id="popup"></div>
+    </div>
+  </body>
+</html>
