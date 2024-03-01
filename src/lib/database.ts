@@ -1,69 +1,11 @@
-export interface Movie {
-	Movie_ID: number;
-	Name: string;
-	Run_Time: number;
-	URLs: string;
-}
-
-export interface PlatformMovie {
-	Movie_ID: number;
-	Platform_ID: number;
-}
-
-export interface PlatformSeries {
-	Series_ID: number;
-	Platform_ID: number;
-}
-
-export interface Platform {
-	Platform_ID: number;
-	Name: string;
-	Website: string;
-	Price_ID: number | null;
-}
-
-export interface Price {
-	Price_ID: number;
-	Price: number;
-	Has_Ads: boolean;
-}
-
-export interface Series {
-	Series_ID: number;
-	Name: string;
-	Episode_Count: number;
-	Season_Count: number;
-	URLs: string;
-}
-
-export async function getMovies() {
-	return [
-		{
-			Movie_ID: 100,
-			Name: 'Barbie',
-			Run_Time: 114,
-			URLs: 'Watch Barbie | Now Streaming | Max'
-		},
-		{
-			Movie_ID: 101,
-			Name: 'Rustin',
-			Run_Time: 108,
-			URLs: 'Watch Rustin | Netflix Official Site'
-		},
-		{
-			Movie_ID: 102,
-			Name: 'Strays',
-			Run_Time: 94,
-			URLs: 'Watch Strays(2023) | Prime Video (amazon.com)'
-		},
-		{
-			Movie_ID: 103,
-			Name: 'Avenger: Endgame',
-			Run_Time: 182,
-			URLs: "Watch Marvel Studios' Avengers: Endgame | Disney +"
-		}
-	];
-}
+export const allDatabaseTables = [
+	'Movies',
+	'Series',
+	'Platforms',
+	'Platform_Movies',
+	'Platform_Series',
+	'Prices'
+];
 
 export async function getMoviesWithPlatforms(): Promise<{ movie: Movie; platformIDs: number[] }[]> {
 	return [
@@ -425,4 +367,75 @@ export async function getRawTableData(
 			];
 	}
 	return [];
+}
+
+export async function postRawTableData(tableName: string, data: any) {
+	return;
+}
+
+export interface Movie {
+	Movie_ID: number;
+	Name: string;
+	Run_Time: number;
+	URLs: string;
+}
+
+export interface PlatformMovie {
+	Movie_ID: number;
+	Platform_ID: number;
+}
+
+export interface PlatformSeries {
+	Series_ID: number;
+	Platform_ID: number;
+}
+
+export interface Platform {
+	Platform_ID: number;
+	Name: string;
+	Website: string;
+	Price_ID: number | null;
+}
+
+export interface Price {
+	Price_ID: number;
+	Price: number;
+	Has_Ads: boolean;
+}
+
+export interface Series {
+	Series_ID: number;
+	Name: string;
+	Episode_Count: number;
+	Season_Count: number;
+	URLs: string;
+}
+
+export async function getMovies() {
+	return [
+		{
+			Movie_ID: 100,
+			Name: 'Barbie',
+			Run_Time: 114,
+			URLs: 'Watch Barbie | Now Streaming | Max'
+		},
+		{
+			Movie_ID: 101,
+			Name: 'Rustin',
+			Run_Time: 108,
+			URLs: 'Watch Rustin | Netflix Official Site'
+		},
+		{
+			Movie_ID: 102,
+			Name: 'Strays',
+			Run_Time: 94,
+			URLs: 'Watch Strays(2023) | Prime Video (amazon.com)'
+		},
+		{
+			Movie_ID: 103,
+			Name: 'Avenger: Endgame',
+			Run_Time: 182,
+			URLs: "Watch Marvel Studios' Avengers: Endgame | Disney +"
+		}
+	];
 }
