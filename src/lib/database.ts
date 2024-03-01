@@ -1,377 +1,32 @@
-export const allDatabaseTables = [
-	'Movies',
-	'Series',
-	'Platforms',
-	'Platform_Movies',
-	'Platform_Series',
-	'Prices'
-];
+import { table } from 'console';
+import mysql from 'mysql2/promise';
 
-export async function getMoviesWithPlatforms(): Promise<{ movie: Movie; platformIDs: number[] }[]> {
-	return [
-		{
-			movie: {
-				Movie_ID: 100,
-				Name: 'Barbie',
-				Run_Time: 114,
-				URLs: 'Watch Barbie | Now Streaming | Max'
-			},
-			platformIDs: [10002]
-		},
-		{
-			movie: {
-				Movie_ID: 101,
-				Name: 'Rustin',
-				Run_Time: 108,
-				URLs: 'Watch Rustin | Netflix Official Site'
-			},
-			platformIDs: [10000]
-		},
-		{
-			movie: {
-				Movie_ID: 102,
-				Name: 'Strays',
-				Run_Time: 94,
-				URLs: 'Watch Strays(2023) | Prime Video (amazon.com)'
-			},
-			platformIDs: [10001]
-		},
-		{
-			movie: {
-				Movie_ID: 103,
-				Name: 'Avenger: Endgame',
-				Run_Time: 182,
-				URLs: "Watch Marvel Studios' Avengers: Endgame | Disney +"
-			},
-			platformIDs: [10003]
-		}
-	];
-}
+// export async function getMovies(): Promise<Movie[]> {}
+export async function createMovie(data: Movie): Promise<Movie> {}
+export async function updateMovie(id: number, data: Movie): Promise<Movie> {}
+export async function deleteMovie(id: number): Promise<void> {}
 
-export async function getSeries() {
-	return [
-		{
-			Series_ID: 100,
-			Name: 'Cyberpunk: Edgerunner',
-			Episode_Count: 10,
-			Season_Count: 1,
-			URLs: 'Watch Cyberpunk: Edgerunners | Netflix Official Si'
-		},
-		{
-			Series_ID: 101,
-			Name: 'The Boys',
-			Episode_Count: 24,
-			Season_Count: 3,
-			URLs: 'Watch The Boys - Season 4 | Prime Video (amazon.co'
-		},
-		{
-			Series_ID: 102,
-			Name: 'The Last Of Us',
-			Episode_Count: 9,
-			Season_Count: 1,
-			URLs: 'Watch The Last of Us (HBO) | Max'
-		},
-		{
-			Series_ID: 103,
-			Name: "Marvel's Jessica Jones",
-			Episode_Count: 39,
-			Season_Count: 3,
-			URLs: 'Watch Jessica Jones | Disney + (disneyplus.com)'
-		}
-	];
-}
+// export async function getSeries(): Promise<Series[]> {}
+export async function createSeries(data: Series): Promise<Series> {}
+export async function updateSeries(id: number, data: Series): Promise<Series> {}
+export async function deleteSeries(id: number): Promise<void> {}
 
-export async function getSeriesWithPlatforms(): Promise<
-	{ series: Series; platformIDs: number[] }[]
-> {
-	return [
-		{
-			series: {
-				Series_ID: 100,
-				Name: 'Cyberpunk: Edgerunner',
-				Episode_Count: 10,
-				Season_Count: 1,
-				URLs: 'Watch Cyberpunk: Edgerunners | Netflix Official Si'
-			},
-			platformIDs: [10002]
-		},
-		{
-			series: {
-				Series_ID: 101,
-				Name: 'The Boys',
-				Episode_Count: 24,
-				Season_Count: 3,
-				URLs: 'Watch The Boys - Season 4 | Prime Video (amazon.co'
-			},
-			platformIDs: [10000]
-		},
-		{
-			series: {
-				Series_ID: 102,
-				Name: 'The Last Of Us',
-				Episode_Count: 9,
-				Season_Count: 1,
-				URLs: 'Watch The Last of Us (HBO) | Max'
-			},
-			platformIDs: [10001]
-		},
-		{
-			series: {
-				Series_ID: 103,
-				Name: "Marvel's Jessica Jones",
-				Episode_Count: 39,
-				Season_Count: 3,
-				URLs: 'Watch Jessica Jones | Disney + (disneyplus.com)'
-			},
-			platformIDs: [10003]
-		}
-	];
-}
+// export async function getPlatforms(): Promise<Platform[]> {}
+export async function createPlatform(data: Platform): Promise<Platform> {}
+export async function updatePlatform(id: number, data: Platform): Promise<Platform> {}
+export async function deletePlatform(id: number): Promise<void> {}
 
-export async function getPlatforms() {
-	return [
-		{
-			Platform_ID: 10000,
-			Name: 'Netflix',
-			Website: 'Netflix-Watch TV Shows Online',
-			Price_ID: 101
-		},
-		{
-			Platform_ID: 10001,
-			Name: 'Max',
-			Website: 'Max | The One to Watch',
-			Price_ID: 100
-		},
-		{
-			Platform_ID: 10002,
-			Name: 'Amazon Prime Video',
-			Website: 'Prime Video | Watch movies, TV shows, Live TV, and',
-			Price_ID: 102
-		},
-		{
-			Platform_ID: 10003,
-			Name: 'Disney +',
-			Website: 'Stream Disney, Pixar, Marvel, Star Wars, Nat Geo |',
-			Price_ID: 103
-		}
-	];
-}
+// export async function getPrices(): Promise<Price[]> {}
+export async function createPrice(data: Price): Promise<Price> {}
+export async function updatePrice(id: number, data: Price): Promise<Price> {}
+export async function deletePrice(id: number): Promise<void> {}
 
-export async function getPrices() {
-	return [
-		{
-			Price_ID: 100,
-			Price: 15.49,
-			Has_Ads: false
-		},
-		{
-			Price_ID: 101,
-			Price: 15.99,
-			Has_Ads: false
-		},
-		{
-			Price_ID: 102,
-			Price: 8.99,
-			Has_Ads: false
-		},
-		{
-			Price_ID: 103,
-			Price: 13.99,
-			Has_Ads: false
-		}
-	];
-}
-
-export async function getPlatformsByMovieID(id: number) {
-	// const [rows] = await connection.query('SELECT * FROM Platform_Movies WHERE Movie_ID = ?', [id]);
-	// const platforms = (rows as PlatformMovie[]).map((row) => row.Platform_ID);
-	// return platforms;
-
-	switch (id) {
-		case 100:
-			return [10001];
-		case 101:
-			return [10000];
-		case 102:
-			return [10002];
-		case 103:
-			return [10003];
-	}
-}
-
-export async function getPlatformsBySeriesID(id: number) {
-	// const [rows] = await connection.query('SELECT * FROM Platform_Series WHERE Series_ID = ?', [id]);
-	// return rows as PlatformSeries[];
-
-	switch (id) {
-		case 100:
-			return [10002];
-		case 101:
-			return [10000];
-		case 102:
-			return [10001];
-		case 103:
-			return [10003];
-	}
-}
-
-export async function getRawTableData(
-	tableName: string
-): Promise<Movie[] | Series[] | Platform[] | PlatformMovie[] | PlatformSeries[] | Price[]> {
-	switch (tableName) {
-		case 'Movies':
-			return [
-				{
-					Movie_ID: 100,
-					Name: 'Barbie',
-					Run_Time: 114,
-					URLs: 'Watch Barbie | Now Streaming | Max'
-				},
-				{
-					Movie_ID: 101,
-					Name: 'Rustin',
-					Run_Time: 108,
-					URLs: 'Watch Rustin | Netflix Official Site'
-				},
-				{
-					Movie_ID: 102,
-					Name: 'Strays',
-					Run_Time: 94,
-					URLs: 'Watch Strays(2023) | Prime Video (amazon.com)'
-				},
-				{
-					Movie_ID: 103,
-					Name: 'Avenger: Endgame',
-					Run_Time: 182,
-					URLs: "Watch Marvel Studios' Avengers: Endgame | Disney +"
-				}
-			];
-		case 'Series':
-			return [
-				{
-					Series_ID: 100,
-					Name: 'Cyberpunk: Edgerunner',
-					Episode_Count: 10,
-					Season_Count: 1,
-					URLs: 'Watch Cyberpunk: Edgerunners | Netflix Official Si'
-				},
-				{
-					Series_ID: 101,
-					Name: 'The Boys',
-					Episode_Count: 24,
-					Season_Count: 3,
-					URLs: 'Watch The Boys - Season 4 | Prime Video (amazon.co)'
-				},
-				{
-					Series_ID: 102,
-					Name: 'The Last Of Us',
-					Episode_Count: 9,
-					Season_Count: 1,
-					URLs: 'Watch The Last of Us (HBO) | Max'
-				},
-				{
-					Series_ID: 103,
-					Name: "Marvel's Jessica Jones",
-					Episode_Count: 39,
-					Season_Count: 3,
-					URLs: 'Watch Jessica Jones | Disney + (disneyplus.com)'
-				}
-			];
-		case 'Platforms':
-			return [
-				{
-					Platform_ID: 10000,
-					Name: 'Netflix',
-					Website: 'Netflix-Watch TV Shows Online',
-					Price_ID: 101
-				},
-				{
-					Platform_ID: 10001,
-					Name: 'Max',
-					Website: 'Max | The One to Watch',
-					Price_ID: 100
-				},
-				{
-					Platform_ID: 10002,
-					Name: 'Amazon Prime Video',
-					Website: 'Prime Video | Watch movies, TV shows, Live TV, and',
-					Price_ID: 102
-				},
-				{
-					Platform_ID: 10003,
-					Name: 'Disney +',
-					Website: 'Stream Disney, Pixar, Marvel, Star Wars, Nat Geo |',
-					Price_ID: 103
-				}
-			];
-		case 'Platform_Movies':
-			return [
-				{
-					Movie_ID: 100,
-					Platform_ID: 10001
-				},
-				{
-					Movie_ID: 101,
-					Platform_ID: 10000
-				},
-				{
-					Movie_ID: 102,
-					Platform_ID: 10002
-				},
-				{
-					Movie_ID: 103,
-					Platform_ID: 10003
-				}
-			];
-		case 'Platform_Series':
-			return [
-				{
-					Series_ID: 100,
-					Platform_ID: 10002
-				},
-				{
-					Series_ID: 101,
-					Platform_ID: 10000
-				},
-				{
-					Series_ID: 102,
-					Platform_ID: 10001
-				},
-				{
-					Series_ID: 103,
-					Platform_ID: 10003
-				}
-			];
-		case 'Prices':
-			return [
-				{
-					Price_ID: 100,
-					Price: 15.49,
-					Has_Ads: false
-				},
-				{
-					Price_ID: 101,
-					Price: 15.99,
-					Has_Ads: false
-				},
-				{
-					Price_ID: 102,
-					Price: 8.99,
-					Has_Ads: false
-				},
-				{
-					Price_ID: 103,
-					Price: 13.99,
-					Has_Ads: false
-				}
-			];
-	}
-	return [];
-}
-
-export async function postRawTableData(tableName: string, data: any) {
-	return;
-}
+const db = mysql.createPool({
+	host: 'classmysql.engr.oregonstate.edu',
+	user: 'cs340_lude',
+	password: '5136',
+	database: 'cs340_lude'
+});
 
 export interface Movie {
 	Movie_ID: number;
@@ -411,31 +66,135 @@ export interface Series {
 	URLs: string;
 }
 
-export async function getMovies() {
-	return [
-		{
-			Movie_ID: 100,
-			Name: 'Barbie',
-			Run_Time: 114,
-			URLs: 'Watch Barbie | Now Streaming | Max'
-		},
-		{
-			Movie_ID: 101,
-			Name: 'Rustin',
-			Run_Time: 108,
-			URLs: 'Watch Rustin | Netflix Official Site'
-		},
-		{
-			Movie_ID: 102,
-			Name: 'Strays',
-			Run_Time: 94,
-			URLs: 'Watch Strays(2023) | Prime Video (amazon.com)'
-		},
-		{
-			Movie_ID: 103,
-			Name: 'Avenger: Endgame',
-			Run_Time: 182,
-			URLs: "Watch Marvel Studios' Avengers: Endgame | Disney +"
-		}
-	];
+export async function getMovies(): Promise<Movie[]> {
+	let query1 = 'SELECT * FROM Movies;';
+	var result = await db.query(query1);
+	return result[0] as Movie[];
+}
+
+export async function getMoviesWithPlatforms(): Promise<{ movie: Movie; platformIDs: number[] }[]> {
+	var result = await getMovies();
+	return result.map(function (x) {
+		return { movie: x, platformIDs: [] };
+	});
+}
+
+export async function getSeries(): Promise<Series[]> {
+	let query1 = 'Select * FROM Series;';
+	var result = await db.query(query1);
+	return result[0] as Series[];
+}
+
+export async function getSeriesWithPlatforms(): Promise<
+	{ series: Series; platformIDs: number[] }[]
+> {
+	var result = await getSeries();
+	return result.map(function (x) {
+		return { series: x, platformIDs: [] };
+	});
+}
+
+export async function getPlatforms(): Promise<Platform[]> {
+	let query1 = 'Select * FROM Platforms;';
+	var result = await db.query(query1);
+	return result[0] as Platform[];
+}
+
+export async function getPrices(): Promise<Price[]> {
+	let query1 = 'Select * FROM Prices;';
+	var result = await db.query(query1);
+	return result[0] as Price[];
+}
+
+export async function getPlatformsByMovieID(): Promise<PlatformMovie[]> {
+	let query1 = 'Select * FROM Platform_Movies;';
+	var result = await db.query(query1);
+	return result[0] as PlatformMovie[];
+}
+
+export async function getPlatformsBySeriesID(): Promise<PlatformSeries[]> {
+	let query1 = 'Select * FROM Platform_Series;';
+	var result = await db.query(query1);
+	return result[0] as PlatformSeries[];
+}
+
+export async function add_data(table_name, data, data1, data2, data3) {
+	let query1 = `INSERT INTO ${table_name} (Movie_ID, Name, Run_Time, URLs) VALUES("${data}", "${data1}", "${data2}", "${data3}");`;
+	var result = await db.query(query1);
+	return result;
+}
+
+export async function delete_data(table_name, id) {
+	let query1 = `DELETE FROM ${table_name} WHERE Movie_ID = ${id};`;
+	const result = await db.query(query1);
+	return result;
+}
+
+export async function patch_data(table_name, id, data, data1, data2) {
+	let query1 = `UPDATE ${table_name} SET Movie_ID = ${id}, Name = "${data}", Run_Time = "${data1}", URLs = "${data2}" WHERE Movie_ID = ${id}; `;
+	console.log(query1);
+	var result = await db.query(query1);
+	return result;
+}
+
+export async function getTableData(
+	tableName: string
+): Promise<Movie[] | Series[] | Platform[] | Price[]> {
+	switch (tableName) {
+		case 'Movies':
+			return getMovies();
+		case 'Series':
+			return getSeries();
+		case 'Platforms':
+			return getPlatforms();
+		case 'Prices':
+			return getPrices();
+	}
+}
+
+export async function createTableData(
+	tableName: string,
+	data: Movie | Series | Platform | Price
+): Promise<Movie | Series | Platform | Price> {
+	switch (tableName) {
+		case 'Movies':
+			return createMovie(data);
+	}
+}
+
+export async function updateTableData(
+	tableName: string,
+	id: number,
+	data: Movie | Series | Platform | Price
+): Promise<Movie | Series | Platform | Price> {
+	switch (tableName) {
+		case 'Movies':
+			return updateMovie(id, data);
+	}
+}
+export async function deleteTableData(tableName: string, id: number): Promise<void> {
+	switch (tableName) {
+		case 'Movies':
+			return deleteMovie(id);
+	}
+}
+
+export async function getRawTableData(
+	tableName: string
+): Promise<Movie[] | Series[] | Platform[] | PlatformMovie[] | PlatformSeries[] | Price[]> {
+	switch (tableName) {
+		case 'Movies':
+			return getMovies();
+		case 'Series':
+			return getSeries();
+		case 'Platforms':
+			return getPlatforms();
+		case 'Platform_Movies':
+			return getPlatformsByMovieID();
+		case 'Platform_Series':
+			return getPlatformsBySeriesID();
+		case 'Prices':
+			return getPrices();
+	}
+	return [];
 }
