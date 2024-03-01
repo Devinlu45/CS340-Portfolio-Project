@@ -106,7 +106,7 @@
 </Modal>
 <Modal bind:showModal={showCreate}>
 	<h2 slot="header">Create New {data.tableName}</h2>
-	<form method="POST" action="/tables/{data.tableName}?post" class="flex w-96 flex-col gap-2">
+	<form method="POST" action="/tables/{data.tableName}?/post" class="flex w-96 flex-col gap-2">
 		{#each Object.keys(data.table[0]) as key}
 			<label>
 				<span class="text-sm">{key}</span>
