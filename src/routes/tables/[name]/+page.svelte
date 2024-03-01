@@ -67,7 +67,7 @@
 	<Modal bind:showModal={showEdit}>
 		{@const row = data.table[rowID]}
 		<h2 slot="header">Edit {rowID} in {data.tableName}</h2>
-		<form method="PUT" action="/tables/{data.tableName}" class="flex flex-col gap-2 w-96">
+		<form method="POST" action="/tables/{data.tableName}?/patch" class="flex flex-col gap-2 w-96">
 			{#each Object.keys(data.table[0]) as key}
 				<label>
 					<span class="text-sm">{key}</span>
@@ -82,14 +82,15 @@
 	</Modal>
 	<Modal bind:showModal={showDelete}>
 		<h2 slot="header">Delete {data.tableName}</h2>
-		<form method="DELETE" action="/tables/{data.tableName}" class="flex flex-col gap-2">
+		<form method="POST" action="/tables/{data.tableName}?/delete" class="flex flex-col gap-2">
 			<p>Do you really want to delete {rowID}?</p>
+			<input type="hidden" name="id" value={rowID} />
 			<button type="submit" class="w-full border-none bg-gray-800 p-2 text-white">Delete</button>
 		</form>
 	</Modal>
 	<Modal bind:showModal={showCreate}>
 		<h2 slot="header">Create New {data.tableName}</h2>
-		<form method="POST" action="/tables/{data.tableName}" class="flex flex-col gap-2 w-96">
+		<form method="POST" action="/tables/{data.tableName}?/post" class="flex flex-col gap-2 w-96">
 			{#each Object.keys(data.table[0]) as key}
 				<label>
 					<span class="text-sm">{key}</span>
