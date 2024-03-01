@@ -14,6 +14,19 @@
 <div class="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
 	<a href="/" class="font-bold"> ← Back </a>
 
+	<!-- Warning Banner -->
+	{#if data.tableName !== 'Movies'}
+		<div
+			class="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+			role="alert"
+		>
+			<strong class="font-bold">Warning!</strong>
+			<span class="block sm:inline">
+				The CRUD operations are not implemented yet. This can just read the table.
+			</span>
+		</div>
+	{/if}
+
 	<h1 class="text-4xl font-bold">Manually Edit {data.tableName}</h1>
 	<p class="text-lg">Edit the data in the table</p>
 
@@ -93,7 +106,7 @@
 </Modal>
 <Modal bind:showModal={showCreate}>
 	<h2 slot="header">Create New {data.tableName}</h2>
-	<form method="POST" action="/tables/{data.tableName}" class="flex w-96 flex-col gap-2">
+	<form method="POST" action="/tables/{data.tableName}?post" class="flex w-96 flex-col gap-2">
 		{#each Object.keys(data.table[0]) as key}
 			<label>
 				<span class="text-sm">{key}</span>
