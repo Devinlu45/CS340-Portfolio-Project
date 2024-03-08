@@ -1,4 +1,4 @@
-import { add_PM, add_PS, add_Prices, add_data_series, add_platform, delete_platform, delete_price, delete_series, getRawTableData, patch_PM, patch_PS, patch_price, patch_series } from '$lib/database';
+import { add_PM, add_PS, add_Prices, add_data_series, add_platform, delete_platform, delete_price, delete_series, getRawTableData, patch_PM, patch_PS, patch_platforms, patch_price, patch_series } from '$lib/database';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { add_data } from '$lib/database';
@@ -131,6 +131,13 @@ export const actions = {
 				const series_id = data.get('Series_ID');
 				const p_id = data.get('Platform_ID');
 				let psResult = await patch_PS(tableName, series_id, p_id)
+				break;
+			case 'Platforms':
+				const platform_ID = data.get('Platform_ID');
+				const platformName = data.get('Name');
+				const site = data.get('Website');
+				const prid = data.get('Price');
+				let theResult = await patch_platforms(tableName, platform_ID, platformName, site, prid)
 				break;
 		}
 	},
