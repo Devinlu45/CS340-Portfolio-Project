@@ -5,6 +5,7 @@ import { add_data } from '$lib/database';
 import { delete_data } from '$lib/database';
 import { patch_data } from '$lib/database';
 import { table } from 'console';
+import { getID } from '$lib/database';
 
 export const actions = {
 	async post({params, request}) {
@@ -22,29 +23,41 @@ export const actions = {
 				console.log(Run_Time)
 				const Urls = data.get('URLs');
 				console.log(Urls)
-				let result = await add_data('Movies', MovieID, MovieName, Run_Time, Urls)
-				break;
+				if (MovieID === '' || MovieName === '' || Run_Time === '') { 
+				} else {
+					let result = await add_data('Movies', MovieID, MovieName, Run_Time, Urls)
+					break;
+				}
 			case 'Series':
 				const SeriesID = data.get('Series_ID');
 				const SeriesName = data.get('Name');
 				const episodeCount = data.get('Episode_Count');
 				const seasonCount = data.get('Season_Count');
 				const seriesUrl = data.get('URLs');
-				let seriesResult = await add_data_series('Series', SeriesID, SeriesName, episodeCount, seasonCount, seriesUrl)
-				break;
+				if (SeriesID === '' || SeriesName === '' || episodeCount === '' || seasonCount === '' || seriesUrl === '') {
+				} else {
+					let seriesResult = await add_data_series('Series', SeriesID, SeriesName, episodeCount, seasonCount, seriesUrl)
+					break;
+				}
 			case 'Platforms':
 				const PlatformID = data.get('Platform_ID');
 				const PlatformName = data.get('Name');
 				const platformWebsite = data.get('Website');
 				const platformPrice = data.get('Price');
-				let platformResult = await add_platform('Platforms', PlatformID, PlatformName, platformWebsite, platformPrice)
-				break;
+				if (PlatformID === '' || PlatformName === '' || platformWebsite === '' || platformPrice === ''){
+				} else {
+					let platformResult = await add_platform('Platforms', PlatformID, PlatformName, platformWebsite, platformPrice)
+					break;
+				}
 			case 'Prices':
 				const PriceID = data.get('Price_ID');
 				const money = data.get('Price');
 				const ads = data.get('Has_Ads');
-				let priceResult = await add_Prices('Prices', PriceID, money, ads)
-				break;
+				if (PriceID === '' || money === '' || ads === ''){
+				} else {
+					let priceResult = await add_Prices('Prices', PriceID, money, ads)
+					break;
+				}
 			case 'Platform_Movies':
 				const M_ID = data.get('Movie_ID');
 				const P_ID = data.get('Platform_ID');
@@ -58,35 +71,34 @@ export const actions = {
 		}
 	},
 	async delete({ params, request }) {
-		console.log("This is running delete")
-		const tableName = params.name;
-		console.log(tableName)
+		let tableName = params.name;
 		const data = await request.formData();
 		switch (tableName) {
 			case 'Movies':
 				const ID = data.get('id');
 				let deletepm = await delete_data('Platform_Movies', ID)
-				let result = await delete_data(tableName, ID)
+				let result = await delete_data('Movies', ID)
 				break;
 			case 'Platform_Movies':
 				const PM_ID = data.get('id');
 				let deleteagain = await delete_data('Platform_Movies', PM_ID)
-				let pmResult = await delete_data(tableName, PM_ID)
 				break;
 			case 'Series':
 				const S_ID = data.get('id');
 				let delete2 = await delete_series('Platform_Series', S_ID)
-				let sResult = await delete_series(tableName, S_ID)
+				let sResult = await delete_series('Series', S_ID)
 				break;
 			case 'Platform_Series':
 				const ps_id = data.get('id');
 				let delete3 = await delete_series('Platform_Series', ps_id)
-				let psResult = await delete_series(tableName, ps_id)
 				break;
 			case 'Prices':
 				const price_id = data.get('id');
-				let delete4 = await delete_platform('Prices', price_id)
-				let delete5 = await delete_platform(tableName, price_id)
+				const platf_id = await getID(price_id)
+				let answer = await delete_price('Platform_Movies', platf_id)
+				let answer1 = await delete_price('Platform_Series', platf_id)
+				let answer2 = await delete_price('Platforms', platf_id)
+				let answer3 = await delete_platform('Prices', price_id)
 				break;
 			case 'Platforms':
 				const Price_2 = data.get('id');
@@ -106,22 +118,31 @@ export const actions = {
 				const MovieName = data.get('Name');
 				const Run_Time = data.get('Run_Time');
 				const Urls = data.get('URLs');
-				let result = await patch_data(tableName, MovieID, MovieName, Run_Time, Urls)
-				break;
+				if (MovieID === '' || MovieName === '' || Run_Time === '') {
+				} else {
+					let result = await patch_data(tableName, MovieID, MovieName, Run_Time, Urls)
+					break;
+				}
 			case 'Series':
 				const SeriesID = data.get('Series_ID');
 				const seriesName = data.get('Name');
 				const episodeCount = data.get('Episode_Count');
 				const seasonCount = data.get('Season_Count');
 				const seriesUrl = data.get('URLs');
-				let seriesResult = await patch_series(tableName, SeriesID, seriesName, episodeCount, seasonCount, seriesUrl)
-				break;
+				if (SeriesID === '' || seriesName === '' || episodeCount === '' || seasonCount === '' || seriesUrl === ''){
+				} else {
+					let seriesResult = await patch_series(tableName, SeriesID, seriesName, episodeCount, seasonCount, seriesUrl)
+					break;
+				}
 			case 'Prices':
 				const PriceID = data.get('Price_ID');
 				const amount = data.get('Price');
 				const boo_ads = data.get('Has_Ads');
-				let priceResult = await patch_price(tableName, PriceID, amount, boo_ads)
-				break;
+				if (PriceID === '' || amount === '' || boo_ads === ''){
+				} else {
+					let priceResult = await patch_price(tableName, PriceID, amount, boo_ads)
+					break;
+				}
 			case 'Platform_Movies':
 				const movie_id = data.get('Movie_ID');
 				const platform_id = data.get('Platform_ID');
@@ -137,8 +158,11 @@ export const actions = {
 				const platformName = data.get('Name');
 				const site = data.get('Website');
 				const prid = data.get('Price');
-				let theResult = await patch_platforms(tableName, platform_ID, platformName, site, prid)
-				break;
+				if (platform_ID === '' || platformName === '' || site === '' || prid === ''){
+				} else {
+					let theResult = await patch_platforms(tableName, platform_ID, platformName, site, prid)
+					break;
+				}
 		}
 	},
 
