@@ -122,6 +122,14 @@ export async function getPlatformsBySeriesID(): Promise <PlatformSeries[]>
 		return result[0] as PlatformSeries[]
 	}
 
+export async function getID(data) {
+	let query1 = `Select Platform_ID from Platforms where Price = ${data}`
+	var result = await db.query(query1)
+	const x = result[0][0];
+	const y = x.Platform_ID.toString();
+	return y
+}
+
 export async function add_data(table_name, data, data1, data2, data3) {
     let query1 = `INSERT INTO ${table_name} (Movie_ID, Name, Run_Time, URLs) VALUES("${data}", "${data1}", "${data2}", "${data3}");`;
     var result = await db.query(query1)
