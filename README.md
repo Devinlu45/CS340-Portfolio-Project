@@ -1,4 +1,4 @@
-# Movie viwer
+# Movie viewer
 
 ## Usage
 
